@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Drawing APP</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_draw.css') }}"> -->
+    <script type="text/javascript" src="{{ url_for('static', filename='draw.js') }}"></script>
+    <style>
+        h1 {text-align: center;}
+        h2 {text-align: center;}
+        div {text-align: center;}
+    </style>
+</head>
+
+<h1>
+    Drawing App
+</h1>
+
+<body>
+    <h1>Results</h1>
+    <div class="results">
+        <h2 style="color:red;">Looks like a {{ index }} ! </h2>
+        <h2 style="color: black;">Probabilities: {{prediction}}</h2>
+    </div>
+    <h2>Model description</h2>
+    
+    <table style="margin-left:auto;margin-right:auto;"> {% for line in architecture %}
+        <tr>
+            {% for cell in line %}
+                <td>{{cell}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %} </table>
+    
+</body>
+
+</html>

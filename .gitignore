@@ -1,0 +1,7 @@
+data/
+venv/
+*.png
+model1-description.txt
+index.html
+cv.py
+describe.py

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drawing App</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles_draw.css') }}"> -->
+    <script type="text/javascript" src="{{ url_for('static', filename='draw.js') }}"></script>
+    <style>
+        h1 {text-align: center;}
+        div {text-align: center;}
+        p {text-align: center;}
+        .bottom-one{margin-bottom: 1cm;}
+    </style>
+</head>
+    <h1 style="color:white;">
+     Drawing App
+    </h1>
+    <div style='color:white;'>
+        Please draw a digit (0-9) into the square below.
+    </div>
+
+<body style="background-color: rgb(10, 10, 12);">
+    <div class='bottom-one'>
+    <form id = "myForm" action="{{ url_for('predict')}}" method="POST" enctype="multipart/form-data">
+        <canvas id="canvas", name ="draw" width="400" height="400" style='border:1pt solid white;'>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                drawCanvas();
+            });
+        </script>
+        </canvas>
+        <input type="hidden" id = 'url' name="url" value="">
+        <div></div>
+        <input type="button" id="clear" value="Clear" onclick="return clearcanvas()">
+        <input type="submit" id = 'predict' value="Predict" onclick="return save();">
+        <form class="teamSelection" method="POST" action="/submitted">  
+            <select class="teamForm" id="teamDropdownSelector" type="text" name="modeldropdown" placeholder="Select A Model">
+                 <!-- <option disabled selected>Select a model</option> -->
+                 <option id="1" value="1">Model 1</option>
+                 <option id="2" value="2">Model 2</option>
+            </select>
+         </form>
+    </form>
+    </div>
+    <div style="color:white;">
+        <p>
+        Model 1 is a convolutional neural network.
+        </p>
+        <p>
+        Model 2 is a neural network without convolution.</p>
+    </div>
+</body>
+</html>
