@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import torch
+import pickle
 import torchvision
 from mlp import MLP
 from torchinfo import summary
@@ -38,7 +39,7 @@ init_Base64 = 21;
 
 
 app=Flask(__name__,template_folder='templates')
-d={"1":'cnn1.h5',"2":"mlp.sav"}
+d={"1":'cnn1.h5',"2":"mlp.sav","3":"optimal_clf_dl.pkl"}
 
 @app.route('/')
 def home_endpoint():
@@ -64,13 +65,18 @@ def predict():
             pred=model.predict(vect)
             stringlist = []
             model.summary(print_fn=lambda x: stringlist.append(x))
-        else:
+        elif chosen_model=='mlp.sav':
             mlp=torch.load(chosen_model)
             mlp.eval()
             vect.astype(np.float32)
             vect=torch.from_numpy(vect).float()
             pred=mlp.forward(vect).detach().numpy()
             stringlist=str(summary(mlp,(1,28,28),verbose=0)).split('\n')
+        else:
+            model=pickle.load(open('optimal_clf_dl.pkl','rb'))
+            decomp=pickle.load(open('decomp-opt.pkl','rb'))
+            pred=model.predict(decomp.transform(vect.reshape((1,-1))))
+            stringlist=[]
         architecture=[]
         for line in stringlist:
             if line[:12]=='Total params':
@@ -86,4 +92,4 @@ def models():
     return render_template('models.html')
 
 if __name__=="__main__":
-    app.run(host="192.168.1.99",port=5000)
+    app.run(host="localhost",port=5000)
