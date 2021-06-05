@@ -21,17 +21,27 @@
     <h1>Results</h1>
     <div class="results">
         <h2 style="color:red;">Looks like a {{ index }} ! </h2>
+        {% if architecture %}
         <h2 style="color: black;">Probabilities: {{prediction}}</h2>
+        {% else %}
+        <h2 style='color:black;'>Probabilities not meaningfull for linear models.</h2>
+        {% endif %}
     </div>
-    <h2>Model description</h2>
+
     
+    <h2>Model description</h2>
+    {% if architecture %}
     <table style="margin-left:auto;margin-right:auto;"> {% for line in architecture %}
         <tr>
             {% for cell in line %}
                 <td>{{cell}}</td>
             {% endfor %}
         </tr>
-    {% endfor %} </table>
+    {% endfor %} 
+    </table>
+    {% else %}
+    <h2 style="color:black;">Decomposition with MiniBatchDictionaryLearnign from scikit-learn and classification with MultitaskLasso.</h2>
+    {% endif %}
     
 </body>
 

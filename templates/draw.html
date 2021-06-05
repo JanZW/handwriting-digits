@@ -38,16 +38,27 @@
                  <!-- <option disabled selected>Select a model</option> -->
                  <option id="1" value="1">Model 1</option>
                  <option id="2" value="2">Model 2</option>
+                 <option id="3" value="3">Model 3</option>
             </select>
          </form>
     </form>
     </div>
     <div style="color:white;">
         <p>
-        Model 1 is a convolutional neural network.
+        Model 1 is a convolutional neural network using Tensorflow/Keras on Google Colab (Accuracy score on mnist test data: 98.9%).
         </p>
         <p>
-        Model 2 is a neural network without convolution.</p>
+        Model 2 is a neural network without convolution using PyTorch on Google Colab (Accuracy score on mnist test data: 97.3%).
+        </p>
+        <p>
+        Model 3 uses dictionary learning and MultitaskLasso (Accuracy score on mnist test data: 83%).
+        </p>
+        <p>
+        All models are using data from http://yann.lecun.com/exdb/mnist/. Note that the prediction accuracy of this app is worse than that of the
+        mnist test data, since there is some discrepancy between pictures of numbers, written with a pen and drawing numbers with a mouse.
+        It is also noticable that some models handle this discrepancy better than otheres.
+        Parts of this work are based on this article by Hugo Mallet: https://towardsdatascience.com/develop-an-interactive-drawing-recognition-app-based-on-cnn-deploy-it-with-flask-95a805de10c0
+        </p>
     </div>
 </body>
 </html>

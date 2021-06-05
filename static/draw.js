@@ -52,7 +52,9 @@ function drawCanvas() {
     
     canvas.addEventListener("touchmove",function (e) {
         if (paint) {
+            console.log("should be drawing")
             addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+            console.log(this.offsetTop)
             redraw();
         }
     });
@@ -81,7 +83,7 @@ function redraw() {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
     context.strokeStyle = curColor;
     context.lineJoin = "round";
-    context.lineWidth = 20;
+    context.lineWidth = 10;
 for (var i = 0; i < clickX.length; i++) {
     context.beginPath();
     if (clickDrag[i] && i) {
