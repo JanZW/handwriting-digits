@@ -36,30 +36,38 @@ function drawCanvas() {
     });
 
     /** 
-     touch imput
+     touch input
     **/
-    canvas.addEventListener("touchstart",function (e) {
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
+    $('#canvas').bind("touchstart",function (e) {
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        var elm = $(this).offset();
+        var x = touch.pageX - elm.left;
+        var y = touch.pageY - elm.top;
 
-        paint = true
-        addClick(mouseX, mouseY);
+        paint = true;
+        addClick(x, y);
         redraw();
 
         e.preventDefault()
     });
 
     
-    canvas.addEventListener("touchmove",function (e) {
+    $('#canvas').bind("touchmove",function (e) {
+        e.preventDefault();
+        var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+        var elm = $(this).offset();
+        var x = touch.pageX - elm.left;
+        var y = touch.pageY - elm.top;
+
         if (paint) {
-            console.log("should be drawing")
-            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-            console.log(this.offsetTop)
+            console.log("should be drawing");
+            addClick(x, y, true);
+            console.log(x,y);
             redraw();
         }
     });
 
-    canvas.addEventListener("touchend",function (e) {
+    $('#canvas').bind("touchend",function (e) {
         paint = false;
     });
     

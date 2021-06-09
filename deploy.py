@@ -92,4 +92,4 @@ def models():
     return render_template('models.html')
 
 if __name__=="__main__":
-    app.run(host="localhost",port=5000)
+    app.run(host="192.168.1.99",port=5000)
